@@ -1,13 +1,21 @@
 _id: req_wrk_9dc8ae4a44f3408fad2bb82b8b0864887f5f9b14
 authentication: {}
-body: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "email": "user@example.com",
+      "password": "string"
+    }
 created: 1594554004312
 description: ""
-headers: []
+headers:
+  - name: Content-Type
+    value: application/json
 isPrivate: false
 metaSortKey: -1594554004313
 method: POST
-modified: 1594560219628
+modified: 1594562098099
 name: Log user in
 parameters: []
 parentId: fld_wrk_9dc8ae4a44f3408fad2bb82b8b08648812dea96f
