@@ -1,0 +1,30 @@
+_id: req_043939f224f04ad3bc654fbe73fb0224
+authentication: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "contact@daniels-roth-stan.fr",
+    	"password": "MrStandu33*"
+    }
+created: 1594551331370
+description: ""
+headers:
+  - id: pair_08bc47e457a440d38cf81d0860083e09
+    name: Content-Type
+    value: application/json
+isPrivate: false
+metaSortKey: -1594490744828
+method: POST
+modified: 1594551331370
+name: login
+parameters: []
+parentId: fld_d77c647cd5784e17b22a48d0200ad925
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: http://backup-organizer.daniels-roth-stan.fr/api/v1/user/login

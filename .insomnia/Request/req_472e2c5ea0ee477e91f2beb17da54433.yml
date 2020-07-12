@@ -1,0 +1,31 @@
+_id: req_472e2c5ea0ee477e91f2beb17da54433
+authentication: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "contact@daniels-roth-stan.fr",
+    	"password": "MrStandu33*",
+    	"name": "DANIELS-ROTH Stan"
+    }
+created: 1594551331287
+description: ""
+headers:
+  - id: pair_08bc47e457a440d38cf81d0860083e09
+    name: Content-Type
+    value: application/json
+isPrivate: false
+metaSortKey: -1588349093684
+method: POST
+modified: 1594551331287
+name: register
+parameters: []
+parentId: fld_90038dbab00e4fe9b34c34e74a5e1662
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: http://backuporganizer.localhost/api/v1/user/register

@@ -1,0 +1,14 @@
+_id: env_env_62817cfc25d34ce1acd6ee705ae48cb5_sub
+color: null
+created: 1594554004637
+data:
+  base_path: /api/v1
+  host: backup-organizer.daniels-roth-stan.fr
+  scheme: https
+dataPropertyOrder: null
+isPrivate: false
+metaSortKey: 1594554004638
+modified: 1594560219697
+name: OpenAPI env
+parentId: env_62817cfc25d34ce1acd6ee705ae48cb5
+type: Environment

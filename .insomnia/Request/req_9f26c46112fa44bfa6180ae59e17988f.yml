@@ -1,0 +1,26 @@
+_id: req_9f26c46112fa44bfa6180ae59e17988f
+authentication: {}
+body: {}
+created: 1594551331302
+description: ""
+headers:
+  - description: ""
+    id: pair_762aa50ec2c349da892fc15108a6472c
+    name: Authorization
+    value: Bearer {% response 'body', 'req_a3a4377a916849f18e46338e8bc279a3',
+      'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'always' %}
+isPrivate: false
+metaSortKey: -1594493736963
+method: GET
+modified: 1594551331302
+name: all
+parameters: []
+parentId: fld_90038dbab00e4fe9b34c34e74a5e1662
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: http://backuporganizer.localhost/api/v1/user/all
