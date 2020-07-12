@@ -1,282 +1,209 @@
 _id: spc_203595fbb6c94a48950187f1ac20fc41
 contentType: yaml
-contents: >-
-  {
-    "openapi": "3.0.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Backup-Organizer API",
-      "description": "Backup-Organizer is a tool to manage projects and websites linked on specific clients. It help to configure backups plans.",
-      "thermsOfService": "https://backup-organizer.daniels-roth-stan.fr",
-      "contact": {
-        "name": "DANIELS-ROTH Stan",
-        "url": "https://daniels-roth-stan.fr",
-        "email": "contact@daniels-roth-stan.fr",
-      },
-      "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0.html",
-      },
-    },
-    "servers": [
-      {
-        "url": "https://backup-organizer.daniels-roth-stan.fr/api/v1",
-        "description": "Prod Server",
-      },
-      {
-        "url": "http://backup-organizer.localhost/api/v1",
-        "description": "Dev Server",
-      },
-    ],
-    "schemes": [
-      "https",
-      "http"
-    ],
-    "tags": [
-      {
-        "name": "user",
-        "description": "Everythings about users",
-      },
-      {
-        "name": "client",
-        "description": "Everything about clients",
-      },
-      {
-        "name": "project",
-        "description": "Everything about projects",
-      },
-      {
-        "name": "websites",
-        "description": "Everything about websites",
-      },
-      {
-        "name": "database",
-        "description": "Everything about databases",
-      },
-      {
-        "name": "backup",
-        "description": "Everything about backups",
-      },
-    ],
-    "paths": {
-      "/user/login": {
-        "post": {
-          "tags": ["user"],
-          "summary": "Log user in",
-          "description": "",
-          "consumes": [ "application/json" ],
-          "produces": [ "application/json" ],
-          requestBody: {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/User/Credentials/Login",
-                },
-              },
-            },
-          },
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "user": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                          },
-                          "name": {
-                            "type": "string",
-                          },
-                          "email": {
-                            "type": "string",
-                            "format": "email",
-                            "pattern": '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$',
-                          },
-                          "created_at": {
-                            "type": "string",
-                            "format": "date-time",
-                          },
-                          "updated_at": {
-                            "type": "string",
-                            "format": "date-time",
-                          },
-                        },
-                      },
-                      "accessToken": {
-                        "type": "string",
-                      },
-                    }
-                  },
-                },
-              },
-            },
-            "401": {
-              "description": "Unauthorized - Invalid login credentials.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "Invalid login credentials.",
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-      "/user/register": {
-        "post": {
-          "tags": ["user"],
-          "summary": "Create user",
-          "description": "",
-          "consumes": [ "application/json" ],
-          "produces": [ "application/json" ],
-          requestBody: {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/User/Credentials/Register",
-                },
-              },
-            },
-          },
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "user": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                          },
-                          "name": {
-                            "type": "string",
-                          },
-                          "email": {
-                            "type": "string",
-                            "format": "email",
-                            "pattern": '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$',
-                          },
-                          "created_at": {
-                            "type": "string",
-                            "format": "date-time",
-                          },
-                          "updated_at": {
-                            "type": "string",
-                            "format": "date-time",
-                          },
-                        },
-                      },
-                      "accessToken": {
-                        "type": "string",
-                      },
-                    }
-                  },
-                },
-              },
-            },
-            "403": {
-              "description": "***(default)*** Forbidden - Register has been manually desactivated.<br/><br/>By default, registration is disabled, to enable it, please set `ALLOW_REGISTRATION` to `true` inside .env",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "Register has been manually desactivated.",
-                      },
-                    },
-                  },
-                },
-              },
-            },
-            "409": {
-              "description": "Conflict - A user already exist with given email address.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "A user already exist with given email address.",
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    "definitions": {
-      "User": {
-        "Credentials": {
-          "Login": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "format": "email",
-                "pattern": '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$',
-              },
-              "password": {
-                "type": "string",
-                "format": "password",
-                "minLength": 8,
-              },
-            },
-            "xml": {
-              "name": "UserCredentialRegister",
-            },
-          },
-          "Register": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "maxLength": 63,
-              },
-              "email": {
-                "type": "string",
-                "format": "email",
-                "pattern": '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$',
-              },
-              "password": {
-                "type": "string",
-                "format": "password",
-                "minLength": 8,
-              },
-            },
-            "xml": {
-              "name": "UserCredentialLogin",
-            },
-          },
-        },
-      },
-    },
-  }
+contents: >
+  openapi: 3.0.0
+
+  info:
+    version: 1.0.0
+    title: Backup-Organizer API
+    description: Backup-Organizer is a tool to manage projects and websites linked on specific clients. It help to configure backups plans.
+    thermsOfService: 'https://backup-organizer.daniels-roth-stan.fr'
+    contact:
+      name: DANIELS-ROTH Stan
+      url: 'https://daniels-roth-stan.fr'
+      email: contact@daniels-roth-stan.fr
+    license:
+      name: Apache 2.0
+      url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  servers:
+    - url: 'https://backup-organizer.daniels-roth-stan.fr/api/v1'
+      description: Prod Server
+    - url: 'http://backup-organizer.localhost/api/v1'
+      description: Dev Server
+  schemes:
+    - https
+    - http
+  tags:
+    - name: user
+      description: Everythings about users
+    - name: client
+      description: Everything about clients
+    - name: project
+      description: Everything about projects
+    - name: websites
+      description: Everything about websites
+    - name: database
+      description: Everything about databases
+    - name: backup
+      description: Everything about backups
+  paths:
+    /user/login:
+      post:
+        tags:
+          - user
+        summary: Log user in
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User/Credentials/Login'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure/user'
+                    accessToken:
+                      type: string
+          '401':
+            description: Unauthorized - Invalid login credentials.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Invalid login credentials.
+    /user/register:
+      post:
+        tags:
+          - user
+        summary: Create user
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User/Credentials/Register'
+        responses:
+          '201':
+            description: CREATED
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure/user'
+                    accessToken:
+                      type: string
+          '403':
+            description: '***(default)*** Forbidden - Register has been manually desactivated.<br/><br/>By default, registration is disabled, to enable it, please set `ALLOW_REGISTRATION` to `true` inside .env'
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Register has been manually desactivated.
+          '409':
+            description: Conflict - A user already exist with given email address.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: A user already exist with given email address.
+    /user/all:
+      get:
+        tags:
+          - user
+        summary: List all users
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      user:
+                        $ref: '#/definitions/User/Structure/user'
+  definitions:
+    User:
+      Structure:
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+          xml:
+            name: UserStructure
+      Credentials:
+        Login:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+            password:
+              type: string
+              format: password
+              minLength: 8
+          xml:
+            name: UserCredentialRegister
+        Register:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 63
+            email:
+              type: string
+              format: email
+              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+            password:
+              type: string
+              format: password
+              minLength: 8
+          xml:
+            name: UserCredentialLogin
+  components:
+    securitySchemes:
+      passport:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1594564498713
+modified: 1594573477464
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
