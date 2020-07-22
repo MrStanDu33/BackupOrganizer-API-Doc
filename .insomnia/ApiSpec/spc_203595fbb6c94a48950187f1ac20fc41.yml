@@ -116,9 +116,37 @@ contents: >
                 schema:
                   type: object
                   properties:
-                    message:
-                      type: string
-                      example: A user already exist with given email address.
+                    errors:
+                      type: object
+                      properties:
+                        conflict:
+                          type: string
+                          example: A user already exist with given email address.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        name:
+                          type: array
+                          items:
+                            type: string
+                            example: The name field is required.
+                        email:
+                          type: array
+                          items:
+                            type: string
+                            example: A user already exist with given email address.
+                        password:
+                          type: array
+                          items:
+                            type: string
+                            example: The password field is required.
     /user/:
       get:
         tags:
@@ -202,6 +230,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1595350668026
+modified: 1595410991480
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec

@@ -1,0 +1,24 @@
+_id: req_wrk_9dc8ae4a44f3408fad2bb82b8b086488d1e6be61
+authentication:
+  prefix: ""
+  token: "{{bearerToken}}"
+  type: bearer
+body: {}
+created: 1595409343142
+description: ""
+headers: []
+isPrivate: false
+metaSortKey: -1595409343142
+method: GET
+modified: 1595409343142
+name: List all users
+parameters: []
+parentId: fld_wrk_9dc8ae4a44f3408fad2bb82b8b08648812dea96f
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: "{{ base_url }}/user/"
