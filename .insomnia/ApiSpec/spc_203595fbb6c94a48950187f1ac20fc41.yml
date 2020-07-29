@@ -59,7 +59,7 @@ contents: >
                   type: object
                   properties:
                     user:
-                      $ref: '#/definitions/User/Structure/user'
+                      $ref: '#/definitions/User/Structure'
                     accessToken:
                       type: string
           '401':
@@ -96,7 +96,7 @@ contents: >
                   type: object
                   properties:
                     user:
-                      $ref: '#/definitions/User/Structure/user'
+                      $ref: '#/definitions/User/Structure'
                     accessToken:
                       type: string
           '403':
@@ -158,7 +158,7 @@ contents: >
                     type: object
                     properties:
                       user:
-                        $ref: '#/definitions/User/Structure/user'
+                        $ref: '#/definitions/User/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -169,6 +169,195 @@ contents: >
                     message:
                       type: string
                       example: Unauthenticated.
+      post:
+        tags:
+          - user
+        summary: Create a user
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '409':
+            description: Conflict - A user already exist with given email address.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        conflict:
+                          type: string
+                          example: A user already exist with given email address.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/user/{userId}/':
+      get:
+        tags:
+          - user
+        summary: Get a user
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No user match given ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No user match given ID.
+      put:
+        tags:
+          - user
+        summary: Update a user
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No user match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No user match this ID.
+      delete:
+        tags:
+          - user
+        summary: Delete a user
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - User deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/definitions/User/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No user match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No user match this ID.
     /user/me:
       get:
         tags:
@@ -188,7 +377,7 @@ contents: >
                   type: object
                   properties:
                     user:
-                      $ref: '#/definitions/User/Structure/user'
+                      $ref: '#/definitions/User/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -220,7 +409,7 @@ contents: >
                     type: object
                     properties:
                       customer:
-                        $ref: '#/definitions/Customer/Structure/customer'
+                        $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -246,7 +435,7 @@ contents: >
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Customer/Creation/customer'
+                $ref: '#/definitions/Customer/Creation'
         responses:
           '201':
             description: Created
@@ -256,7 +445,7 @@ contents: >
                   type: object
                   properties:
                     customer:
-                      $ref: '#/definitions/Customer/Structure/customer'
+                      $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -314,7 +503,7 @@ contents: >
                   type: object
                   properties:
                     customer:
-                      $ref: '#/definitions/Customer/Structure/customer'
+                      $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -326,7 +515,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No customer match this id
+            description: Not Found - No customer match this ID.
             content:
               application/json:
                 schema:
@@ -334,11 +523,11 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No customer match this id
+                      example: No customer match this ID.
       put:
         tags:
           - customer
-        summary: Get a customer
+        summary: Update a customer
         description: ''
         consumes:
           - application/json
@@ -350,7 +539,7 @@ contents: >
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Customer/Creation/customer'
+                $ref: '#/definitions/Customer/Creation'
         responses:
           '200':
             description: OK
@@ -360,7 +549,7 @@ contents: >
                   type: object
                   properties:
                     customer:
-                      $ref: '#/definitions/Customer/Structure/customer'
+                      $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -372,7 +561,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No customer match this id
+            description: Not Found - No customer match this ID.
             content:
               application/json:
                 schema:
@@ -380,11 +569,11 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No customer match this id
+                      example: No customer match this ID.
       delete:
         tags:
           - customer
-        summary: Get a customer
+        summary: Delete a customer
         description: ''
         produces:
           - application/json
@@ -399,7 +588,7 @@ contents: >
                   type: object
                   properties:
                     customer:
-                      $ref: '#/definitions/Customer/Structure/customer'
+                      $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -411,7 +600,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No customer match this id
+            description: Not Found - No customer match this ID.
             content:
               application/json:
                 schema:
@@ -419,31 +608,30 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No customer match this id
+                      example: No customer match this ID.
     /project/: {}
   definitions:
     User:
       Structure:
-        user:
-          type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-            name:
-              type: string
-            email:
-              type: string
-              format: email
-              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-          xml:
-            name: UserStructure
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+          email:
+            type: string
+            format: email
+            pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        xml:
+          name: UserStructure
       Credentials:
         Login:
           type: object
@@ -474,130 +662,143 @@ contents: >
               minLength: 8
           xml:
             name: UserCredentialLogin
+      Creation:
+        type: object
+        properties:
+          name:
+            type: string
+          email:
+            type: string
+            format: email
+            pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+          password:
+            type: string
+            format: password
+            minLength: 8
+        xml:
+          name: UserStructure
     Customer:
       Structure:
-        customer:
-          type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-            name:
-              type: string
-            siren:
-              type: string
-              length: 9
-              nullable: true
-            logo:
-              type: string
-              format: binary
-              nullable: true
-            address_street_number:
-              type: string
-              nullable: true
-            address_street_name:
-              type: string
-              nullable: true
-            address_zip_code:
-              type: string
-              length: 5
-              nullable: true
-            address_city:
-              type: string
-              nullable: true
-            address_country:
-              type: string
-              nullable: true
-            address_billing:
-              type: string
-              nullable: true
-            tva_number:
-              type: string
-              length: '13'
-              nullable: true
-            website:
-              type: string
-              format: uri
-              nullable: true
-            source:
-              type: string
-              nullable: true
-            referent_name:
-              type: string
-              nullable: true
-            referent_email:
-              type: string
-              format: email
-              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
-              nullable: true
-            referent_number:
-              type: string
-              nullable: true
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-          xml:
-            name: CustomerStructure
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+          siren:
+            type: string
+            length: 9
+            nullable: true
+          logo:
+            type: string
+            format: binary
+            nullable: true
+          address_street_number:
+            type: string
+            nullable: true
+          address_street_name:
+            type: string
+            nullable: true
+          address_zip_code:
+            type: string
+            length: 5
+            nullable: true
+          address_city:
+            type: string
+            nullable: true
+          address_country:
+            type: string
+            nullable: true
+          address_billing:
+            type: string
+            nullable: true
+          tva_number:
+            type: string
+            length: '13'
+            nullable: true
+          website:
+            type: string
+            format: uri
+            nullable: true
+          source:
+            type: string
+            nullable: true
+          referent_name:
+            type: string
+            nullable: true
+          referent_email:
+            type: string
+            format: email
+            pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+            nullable: true
+          referent_number:
+            type: string
+            nullable: true
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        xml:
+          name: CustomerStructure
       Creation:
-        customer:
-          type: object
-          properties:
-            name:
-              type: string
-            siren:
-              type: string
-              length: 9
-              nullable: true
-            logo:
-              type: string
-              format: binary
-              nullable: true
-            address_street_number:
-              type: string
-              nullable: true
-            address_street_name:
-              type: string
-              nullable: true
-            address_zip_code:
-              type: string
-              length: 5
-              nullable: true
-            address_city:
-              type: string
-              nullable: true
-            address_country:
-              type: string
-              nullable: true
-            address_billing:
-              type: string
-              nullable: true
-            tva_number:
-              type: string
-              length: '13'
-              nullable: true
-            website:
-              type: string
-              format: uri
-              nullable: true
-            source:
-              type: string
-              nullable: true
-            referent_name:
-              type: string
-              nullable: true
-            referent_email:
-              type: string
-              format: email
-              pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
-              nullable: true
-            referent_number:
-              type: string
-              nullable: true
-          xml:
-            name: CustomerStructure
+        type: object
+        properties:
+          name:
+            type: string
+          siren:
+            type: string
+            length: 9
+            nullable: true
+          logo:
+            type: string
+            format: binary
+            nullable: true
+          address_street_number:
+            type: string
+            nullable: true
+          address_street_name:
+            type: string
+            nullable: true
+          address_zip_code:
+            type: string
+            length: 5
+            nullable: true
+          address_city:
+            type: string
+            nullable: true
+          address_country:
+            type: string
+            nullable: true
+          address_billing:
+            type: string
+            nullable: true
+          tva_number:
+            type: string
+            length: '13'
+            nullable: true
+          website:
+            type: string
+            format: uri
+            nullable: true
+          source:
+            type: string
+            nullable: true
+          referent_name:
+            type: string
+            nullable: true
+          referent_email:
+            type: string
+            format: email
+            pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,64}$'
+            nullable: true
+          referent_number:
+            type: string
+            nullable: true
+        xml:
+          name: CustomerStructure
   components:
     securitySchemes:
       passport:
@@ -606,6 +807,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1595958724185
+modified: 1596022704306
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
