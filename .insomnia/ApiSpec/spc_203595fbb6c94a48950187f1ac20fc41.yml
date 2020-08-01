@@ -155,10 +155,7 @@ contents: >
                 schema:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      user:
-                        $ref: '#/definitions/User/Structure'
+                    $ref: '#/definitions/User/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -406,10 +403,7 @@ contents: >
                 schema:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      customer:
-                        $ref: '#/definitions/Customer/Structure'
+                    $ref: '#/definitions/Customer/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -570,6 +564,21 @@ contents: >
                     message:
                       type: string
                       example: No customer match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
       delete:
         tags:
           - customer
@@ -609,7 +618,233 @@ contents: >
                     message:
                       type: string
                       example: No customer match this ID.
-    /project/: {}
+    /project/:
+      get:
+        tags:
+          - project
+        summary: Get a list of all projects
+        description: ''
+        parameters:
+          - name: customerId
+            in: query
+            schema:
+              type: integer
+              description: Customer's id.
+              example: '1'
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Project/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+      post:
+        tags:
+          - project
+        summary: Create a project
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Project/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    project:
+                      $ref: '#/definitions/Project/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/project/{projectId}':
+      get:
+        tags:
+          - project
+        summary: Get a project
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    project:
+                      $ref: '#/definitions/Project/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No project match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No project match this ID.
+      put:
+        tags:
+          - project
+        summary: Update a project
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Project/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    project:
+                      $ref: '#/definitions/Project/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No project match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No project match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+      delete:
+        tags:
+          - project
+        summary: Delete a project
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - Project deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    project:
+                      $ref: '#/definitions/Project/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No project match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No project match this ID.
   definitions:
     User:
       Structure:
@@ -645,7 +880,7 @@ contents: >
               format: password
               minLength: 8
           xml:
-            name: UserCredentialRegister
+            name: UserCredentialLogin
         Register:
           type: object
           properties:
@@ -661,7 +896,7 @@ contents: >
               format: password
               minLength: 8
           xml:
-            name: UserCredentialLogin
+            name: UserCredentialRegister
       Creation:
         type: object
         properties:
@@ -676,7 +911,7 @@ contents: >
             format: password
             minLength: 8
         xml:
-          name: UserStructure
+          name: UserCreation
     Customer:
       Structure:
         type: object
@@ -798,7 +1033,41 @@ contents: >
             type: string
             nullable: true
         xml:
-          name: CustomerStructure
+          name: CustomerCreation
+    Project:
+      Structure:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          customerId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        xml:
+          name: ProjectStructure
+      Creation:
+        type: object
+        properties:
+          customerId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+        xml:
+          name: ProjectCreation
   components:
     securitySchemes:
       passport:
@@ -807,6 +1076,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1596022704306
+modified: 1596285269478
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
