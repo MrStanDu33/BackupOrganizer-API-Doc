@@ -28,7 +28,7 @@ contents: >
       description: Everything about customers
     - name: project
       description: Everything about projects
-    - name: websites
+    - name: website
       description: Everything about websites
     - name: database
       description: Everything about databases
@@ -845,6 +845,460 @@ contents: >
                     message:
                       type: string
                       example: No project match this ID.
+    /website/:
+      get:
+        tags:
+          - website
+        summary: Get a list of all websites
+        description: ''
+        parameters:
+          - name: projectId
+            in: query
+            schema:
+              type: integer
+              description: Project's id.
+              example: '1'
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Website/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+      post:
+        tags:
+          - website
+        summary: Create a website
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Website/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    website:
+                      $ref: '#/definitions/Website/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/website/{websiteId}':
+      get:
+        tags:
+          - website
+        summary: Get a website
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    website:
+                      $ref: '#/definitions/Website/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No website match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No website match this ID.
+      put:
+        tags:
+          - website
+        summary: Update a website
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Website/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    website:
+                      $ref: '#/definitions/Website/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No website match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No website match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+      delete:
+        tags:
+          - website
+        summary: Delete a website
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - Website deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    website:
+                      $ref: '#/definitions/Website/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No website match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No website match this ID.
+    /database/:
+      get:
+        tags:
+          - database
+        summary: Get a list of all websites
+        description: ''
+        parameters:
+          - name: projectId
+            in: query
+            schema:
+              type: integer
+              description: Project's id.
+              example: '1'
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Database/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+      post:
+        tags:
+          - database
+        summary: Create a database
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Database/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    database:
+                      $ref: '#/definitions/Database/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/database/{websiteId}':
+      get:
+        tags:
+          - database
+        summary: Get a database
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    database:
+                      $ref: '#/definitions/Database/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No database match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No database match this ID.
+      put:
+        tags:
+          - database
+        summary: Update a database
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Database/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    database:
+                      $ref: '#/definitions/Database/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No database match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No database match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+      delete:
+        tags:
+          - database
+        summary: Delete a database
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - Database deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    database:
+                      $ref: '#/definitions/Database/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No database match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No database match this ID.
   definitions:
     User:
       Structure:
@@ -1068,6 +1522,74 @@ contents: >
             type: string
         xml:
           name: ProjectCreation
+    Website:
+      Structure:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          projectId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        xml:
+          name: WebsiteStructure
+      Creation:
+        type: object
+        properties:
+          projectId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+        xml:
+          name: WebsiteCreation
+    Database:
+      Structure:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          projectId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        xml:
+          name: DatabaseStructure
+      Creation:
+        type: object
+        properties:
+          projectId:
+            type: integer
+            format: int64
+          name:
+            type: string
+          description:
+            type: string
+        xml:
+          name: DatabaseCreation
   components:
     securitySchemes:
       passport:
@@ -1076,6 +1598,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1596285269478
+modified: 1596622557529
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
