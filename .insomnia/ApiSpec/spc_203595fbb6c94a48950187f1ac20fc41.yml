@@ -1299,6 +1299,446 @@ contents: >
                     message:
                       type: string
                       example: No database match this ID.
+    /backup/duration:
+      get:
+        tags:
+          - backup
+        summary: Get a list of all backup durations
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Backup/Duration/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+      post:
+        tags:
+          - backup
+        summary: Create a backup duration
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Backup/Duration/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    duration:
+                      $ref: '#/definitions/Backup/Duration/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/backup/duration/{durationId}':
+      get:
+        tags:
+          - backup
+        summary: Get a backup duration
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    duration:
+                      $ref: '#/definitions/Backup/Duration/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No duration match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No duration match this ID.
+      put:
+        tags:
+          - backup
+        summary: Update a backup duration
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Backup/Duration/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    duration:
+                      $ref: '#/definitions/Backup/Duration/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No duration match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No duration match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+      delete:
+        tags:
+          - backup
+        summary: Delete a backup duration
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - Duration deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    duration:
+                      $ref: '#/definitions/Backup/Duration/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No duration match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No duration match this ID.
+    /backup/frequency:
+      get:
+        tags:
+          - backup
+        summary: Get a list of all backup frequencies
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Backup/Frequency/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+      post:
+        tags:
+          - backup
+        summary: Create a backup frequency
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Backup/Frequency/Creation'
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    frequency:
+                      $ref: '#/definitions/Backup/Frequency/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+    '/backup/frequency/{durationId}':
+      get:
+        tags:
+          - backup
+        summary: Get a backup frequency
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    frequency:
+                      $ref: '#/definitions/Backup/Frequency/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No frequency match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No frequency match this ID.
+      put:
+        tags:
+          - backup
+        summary: Update a backup frequency
+        description: ''
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        security:
+          - passport: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Backup/Frequency/Creation'
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    frequency:
+                      $ref: '#/definitions/Backup/Frequency/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No frequency match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No frequency match this ID.
+          '422':
+            description: Unprocessable Entity - Data given does not match prerequisites.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+                      properties:
+                        field:
+                          type: array
+                          items:
+                            type: string
+                            example: Validation error
+      delete:
+        tags:
+          - backup
+        summary: Delete a backup frequency
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK - Frequency deleted
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    frequency:
+                      $ref: '#/definitions/Backup/Frequency/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+          '404':
+            description: Not Found - No frequency match this ID.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: No frequency match this ID.
   definitions:
     User:
       Structure:
@@ -1617,6 +2057,67 @@ contents: >
             type: boolean
         xml:
           name: DatabaseCreation
+    Backup:
+      Duration:
+        Structure:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            name:
+              type: string
+            value:
+              type: integer
+              format: int64
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+          xml:
+            name: BackupDurationStructure
+        Creation:
+          type: object
+          properties:
+            name:
+              type: string
+            value:
+              type: integer
+              format: int64
+          xml:
+            name: BackupDurationCreation
+      Frequency:
+        Structure:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            name:
+              type: string
+            value:
+              type: integer
+              format: int64
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+          xml:
+            name: BackupFrequencyStructure
+        Creation:
+          type: object
+          properties:
+            name:
+              type: string
+            value:
+              type: integer
+              format: int64
+          xml:
+            name: BackupFrequencyCreation
   components:
     securitySchemes:
       passport:
@@ -1625,6 +2126,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1596622959757
+modified: 1596884008338
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
