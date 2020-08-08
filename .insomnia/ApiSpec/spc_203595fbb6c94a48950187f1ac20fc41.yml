@@ -1072,7 +1072,7 @@ contents: >
                     message:
                       type: string
                       example: No website match this ID.
-    /database/:
+    /database:
       get:
         tags:
           - database
@@ -2126,6 +2126,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1596894989225
+modified: 1596895642595
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
