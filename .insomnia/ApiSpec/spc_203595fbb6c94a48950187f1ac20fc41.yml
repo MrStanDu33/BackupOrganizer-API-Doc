@@ -137,7 +137,7 @@ contents: >
                           items:
                             type: string
                             example: Validation error
-    /user/:
+    /user:
       get:
         tags:
           - user
@@ -230,7 +230,7 @@ contents: >
                           items:
                             type: string
                             example: Validation error
-    '/user/{userId}/':
+    '/user/{userId}':
       get:
         tags:
           - user
@@ -385,7 +385,7 @@ contents: >
                     message:
                       type: string
                       example: Unauthenticated.
-    /customer/:
+    /customer:
       get:
         tags:
           - customer
@@ -618,7 +618,7 @@ contents: >
                     message:
                       type: string
                       example: No customer match this ID.
-    /project/:
+    /project:
       get:
         tags:
           - project
@@ -845,7 +845,7 @@ contents: >
                     message:
                       type: string
                       example: No project match this ID.
-    /website/:
+    /website:
       get:
         tags:
           - website
@@ -2126,6 +2126,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1596884008338
+modified: 1596894989225
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
