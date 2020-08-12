@@ -1757,7 +1757,36 @@ contents: >
                 schema:
                   type: array
                   items:
-                    $ref: '#/definitions/Backup/Website/Structure'
+                    $ref: '#/definitions/Backup/Plan/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+    '/backup/website/{websiteId}':
+      get:
+        tags:
+          - backup
+        summary: Get a list of all website's backups plans
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -1783,7 +1812,7 @@ contents: >
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Backup/Website/Creation'
+                $ref: '#/definitions/Backup/Plan/Creation'
         responses:
           '201':
             description: Created
@@ -1793,7 +1822,7 @@ contents: >
                   type: object
                   properties:
                     plan:
-                      $ref: '#/definitions/Backup/Website/Structure'
+                      $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -1819,146 +1848,6 @@ contents: >
                           items:
                             type: string
                             example: Validation error
-    '/backup/website/{websiteId}':
-      get:
-        tags:
-          - backup
-        summary: Get a website backup plan
-        description: ''
-        produces:
-          - application/json
-        security:
-          - passport: []
-        responses:
-          '200':
-            description: OK
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    plan:
-                      $ref: '#/definitions/Backup/Website/Structure'
-          '401':
-            description: Unauthorized - Unauthenticated.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: Unauthenticated.
-          '404':
-            description: Not Found - No website backup plan match this ID.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: No website backup plan match this ID.
-      put:
-        tags:
-          - backup
-        summary: Update a website backup plan
-        description: ''
-        consumes:
-          - application/json
-        produces:
-          - application/json
-        security:
-          - passport: []
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: '#/definitions/Backup/Website/Creation'
-        responses:
-          '200':
-            description: OK
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    plan:
-                      $ref: '#/definitions/Backup/Website/Structure'
-          '401':
-            description: Unauthorized - Unauthenticated.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: Unauthenticated.
-          '404':
-            description: Not Found - No website backup plan match this ID.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: No website backup plan match this ID.
-          '422':
-            description: Unprocessable Entity - Data given does not match prerequisites.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    errors:
-                      type: object
-                      properties:
-                        field:
-                          type: array
-                          items:
-                            type: string
-                            example: Validation error
-      delete:
-        tags:
-          - backup
-        summary: Delete a website backup plan
-        description: ''
-        produces:
-          - application/json
-        security:
-          - passport: []
-        responses:
-          '200':
-            description: OK - Website backup plan deleted
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    plan:
-                      $ref: '#/definitions/Backup/Website/Structure'
-          '401':
-            description: Unauthorized - Unauthenticated.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: Unauthenticated.
-          '404':
-            description: Not Found - No website backup plan match this ID.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: No website backup plan match this ID.
     /backup/database:
       get:
         tags:
@@ -1977,7 +1866,36 @@ contents: >
                 schema:
                   type: array
                   items:
-                    $ref: '#/definitions/Backup/Database/Structure'
+                    $ref: '#/definitions/Backup/Plan/Structure'
+          '401':
+            description: Unauthorized - Unauthenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Unauthenticated.
+    '/backup/database/{databaseId}':
+      get:
+        tags:
+          - backup
+        summary: Get a list of all database's backups plans
+        description: ''
+        produces:
+          - application/json
+        security:
+          - passport: []
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -2003,7 +1921,7 @@ contents: >
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Backup/Database/Creation'
+                $ref: '#/definitions/Backup/Plan/Creation'
         responses:
           '201':
             description: Created
@@ -2013,7 +1931,7 @@ contents: >
                   type: object
                   properties:
                     plan:
-                      $ref: '#/definitions/Backup/Database/Structure'
+                      $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -2039,11 +1957,11 @@ contents: >
                           items:
                             type: string
                             example: Validation error
-    '/backup/database/{databaseId}':
+    '/backup/plan/{planId}':
       get:
         tags:
           - backup
-        summary: Get a database backup plan
+        summary: Get a backup plan
         description: ''
         produces:
           - application/json
@@ -2058,7 +1976,7 @@ contents: >
                   type: object
                   properties:
                     plan:
-                      $ref: '#/definitions/Backup/Database/Structure'
+                      $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -2070,7 +1988,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No database backup plan match this ID.
+            description: Not Found - No backup plan match this ID.
             content:
               application/json:
                 schema:
@@ -2078,11 +1996,11 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No database backup plan match this ID.
+                      example: No backup plan match this ID.
       put:
         tags:
           - backup
-        summary: Update a database backup plan
+        summary: Update a backup plan
         description: ''
         consumes:
           - application/json
@@ -2094,7 +2012,7 @@ contents: >
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Backup/Database/Creation'
+                $ref: '#/definitions/Backup/Plan/Creation'
         responses:
           '200':
             description: OK
@@ -2104,7 +2022,7 @@ contents: >
                   type: object
                   properties:
                     plan:
-                      $ref: '#/definitions/Backup/Database/Structure'
+                      $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -2116,7 +2034,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No database backup plan match this ID.
+            description: Not Found - No backup plan match this ID.
             content:
               application/json:
                 schema:
@@ -2124,7 +2042,7 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No database backup plan match this ID.
+                      example: No backup plan match this ID.
           '422':
             description: Unprocessable Entity - Data given does not match prerequisites.
             content:
@@ -2143,7 +2061,7 @@ contents: >
       delete:
         tags:
           - backup
-        summary: Delete a database backup plan
+        summary: Delete a backup plan
         description: ''
         produces:
           - application/json
@@ -2151,14 +2069,14 @@ contents: >
           - passport: []
         responses:
           '200':
-            description: OK - Database backup plan deleted
+            description: OK - Backup plan deleted
             content:
               application/json:
                 schema:
                   type: object
                   properties:
                     plan:
-                      $ref: '#/definitions/Backup/Database/Structure'
+                      $ref: '#/definitions/Backup/Plan/Structure'
           '401':
             description: Unauthorized - Unauthenticated.
             content:
@@ -2170,7 +2088,7 @@ contents: >
                       type: string
                       example: Unauthenticated.
           '404':
-            description: Not Found - No database backup plan match this ID.
+            description: Not Found - No backup plan match this ID.
             content:
               application/json:
                 schema:
@@ -2178,7 +2096,7 @@ contents: >
                   properties:
                     message:
                       type: string
-                      example: No database backup plan match this ID.
+                      example: No backup plan match this ID.
   definitions:
     User:
       Structure:
@@ -2558,71 +2476,18 @@ contents: >
               format: int64
           xml:
             name: BackupFrequencyCreation
-      Website:
+      Plan:
         Structure:
           type: object
           properties:
             id:
               type: integer
               format: int64
-            websiteId:
+            entityId:
               type: integer
               format: int64
-            frequencyId:
-              type: integer
-              format: int64
-            durationId:
-              type: integer
-              format: int64
-            last_exec_date:
+            entityType:
               type: string
-              format: date-time
-            last_exec_status:
-              type: boolean
-            output_folder:
-              type: string
-            output_filename:
-              type: string
-            verbose:
-              type: boolean
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-          xml:
-            name: BackupWebsiteStructure
-        Creation:
-          type: object
-          properties:
-            websiteId:
-              type: integer
-              format: int64
-            frequencyId:
-              type: integer
-              format: int64
-            durationId:
-              type: integer
-              format: int64
-            output_folder:
-              type: string
-            output_filename:
-              type: string
-            verbose:
-              type: boolean
-          xml:
-            name: BackupWebsiteCreation
-      Database:
-        Structure:
-          type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-            databaseId:
-              type: integer
-              format: int64
             frequencyId:
               type: integer
               format: int64
@@ -2651,9 +2516,6 @@ contents: >
         Creation:
           type: object
           properties:
-            databaseId:
-              type: integer
-              format: int64
             frequencyId:
               type: integer
               format: int64
@@ -2676,6 +2538,6 @@ contents: >
         bearerFormat: JWT
 created: 1594551331203
 fileName: BackupOrganizerAPI-Doc
-modified: 1597226092249
+modified: 1597232050880
 parentId: wrk_9dc8ae4a44f3408fad2bb82b8b086488
 type: ApiSpec
